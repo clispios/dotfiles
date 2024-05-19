@@ -1,0 +1,12 @@
+[manager]
+sort_by = "natural"
+sort_reverse = false
+sort_transliteration = false
+sort_dir_first = false
+sort_sensitive = false
+
+[which]
+sort_reverse = false
+sort_transliteration = true
+sort_dir_first = false
+sort_sensitive = false

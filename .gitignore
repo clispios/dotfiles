@@ -1,0 +1,7 @@
+.config/nvim/tags
+.config/nvim/test.sh
+.config/nvim/.luarc.json
+.config/nvim/nvim
+
+.config/nvim/spell/
+.config/nvim/lazy-lock.json
