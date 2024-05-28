@@ -5,8 +5,11 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require 'lint'
+      local virtual = os.getenv 'VIRTUAL_ENV' or '/usr'
+      table.insert(lint.linters.mypy.args, '--python-executable')
+      table.insert(lint.linters.mypy.args, virtual .. '/bin/python3')
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
+        python = { 'ruff', 'mypy' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,

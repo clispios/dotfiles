@@ -18,8 +18,8 @@ play_icon = "▶"
 pause_icon = "▌▌"
 liked_icon = "♥"
 playback_window_position = "Top"
-cover_img_length = 9
-cover_img_width = 4
+cover_img_length = 17
+cover_img_width = 8
 playback_window_width = 5
 
 [device]

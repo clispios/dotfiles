@@ -10,7 +10,7 @@ vim.opt.number = true
 -- vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = 'a'
+vim.opt.mouse = 'c'
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -48,7 +48,7 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = ' ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -59,4 +59,6 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+vim.wo.relativenumber = true
+vim.o.tabstop = 4
 -- vim: ts=2 sts=2 sw=2 et

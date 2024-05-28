@@ -6,7 +6,7 @@ local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices
 config.font = wezterm.font("Iosevka Nerd Font", { weight = "DemiBold" })
-config.font_size = 12
+config.font_size = 15
 --config.freetype_load_target = "VerticalLcd"
 --config.freetype_render_target = "HorizontalLcd"
 config.color_scheme = "tokyonight_night"
@@ -19,6 +19,11 @@ config.window_frame = {
 	--active_titlebar_bg = "#333333",
 	--inactive_titlebar_bg = "#333333",
 }
+
+-- wezterm.on("maximize-active-window", function(window, _)
+-- 	window:toast_notification("wezterm", "ahhhhh!", nil, 4000)
+-- 	window:maximize()
+-- end)
 
 config.colors = {
 	tab_bar = {
@@ -46,6 +51,11 @@ config.keys = {
 		key = "b",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.RotatePanes("Clockwise"),
+	},
+	{
+		key = "f",
+		mods = "CTRL|SHIFT|ALT",
+		action = wezterm.action.ToggleFullScreen,
 	},
 }
 

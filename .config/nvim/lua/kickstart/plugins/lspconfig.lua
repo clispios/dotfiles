@@ -158,7 +158,36 @@ return {
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        pyright = {
+          capabilities = (function()
+            local caps = vim.lsp.protocol.make_client_capabilities()
+            caps.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
+            return caps
+          end)(),
+          settings = {
+            python = {
+              analysis = {
+                useLibraryCodeForTypes = true,
+                diagnosticSeverityOverrides = {
+                  reportUnusedVariable = false, -- or anything
+                },
+                typeCheckingMode = 'basic',
+              },
+            },
+          },
+        },
+        -- pylsp = {
+        --   settings = {
+        --     pylsp = {
+        --       plugins = {
+        --         pylint = { enabled = false },
+        --         pyflakes = { enabled = false },
+        --         pycodestyle = { enabled = false },
+        --         mccabe = { enabled = false },
+        --       },
+        --     },
+        --   },
+        -- },
         rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -166,7 +195,14 @@ return {
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
+        eslint = {},
+        cssls = {},
+        -- css_variables = {},
+        dockerls = {},
+        jsonls = {},
+        html = {},
         tsserver = {},
+        yamlls = {},
         --
 
         lua_ls = {
@@ -198,6 +234,9 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'html',
+        'cssls',
+        'eslint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
