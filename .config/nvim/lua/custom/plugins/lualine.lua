@@ -1,3 +1,7 @@
+local function happy_stuff()
+  return [[幸 🌊]]
+end
+
 local lualine_conf = {
   options = {
     icons_enabled = true,
@@ -21,7 +25,7 @@ local lualine_conf = {
     lualine_a = { { 'mode', separator = { left = '\u{e0b6}', right = '\u{e0b8}' }, right_padding = 1 } },
     lualine_b = { 'branch', 'diff', 'diagnostics' },
     lualine_c = { 'filename' },
-    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_x = { 'encoding', 'fileformat', 'filetype', happy_stuff },
     lualine_y = { 'progress' },
     lualine_z = { 'location', { 'datetime', style = '%H:%m:%S', separator = { right = '\u{e0b4}' }, left_padding = 1 } },
   },

@@ -60,7 +60,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
-  require 'kickstart.plugins.autopairs',
+  --  require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -79,6 +79,12 @@ require('lazy').setup({
   require 'custom.plugins.trouble',
 
   require 'custom.plugins.git_conflict',
+
+  require 'custom.plugins.oil',
+
+  require 'custom.plugins.nvim-surround',
+
+  require 'custom.plugins.schemastore',
 
   -- require 'custom.plugins.null-ls',
 }, {

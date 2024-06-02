@@ -202,9 +202,45 @@ return {
         jsonls = {},
         html = {},
         tsserver = {},
-        yamlls = {},
-        --
 
+        yamlls = {
+          -- on_attach = function(_, bufnr)
+          --   print 'LSP attached'
+          --   local yml = require 'yamlls'
+          --   yml.setup {}
+          --   -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+          -- end,
+          settings = {
+            yaml = {
+              schemaStore = {
+                url = '',
+                enable = false,
+              },
+              schemas = require('schemastore').yaml.schemas(),
+              customTags = {
+                '!Base64 scalar',
+                '!Cidr scalar',
+                '!And sequence',
+                '!Equals sequence',
+                '!If sequence',
+                '!Not sequence',
+                '!Or sequence',
+                '!Condition scalar',
+                '!FindInMap sequence',
+                '!GetAtt scalar',
+                '!GetAtt sequence',
+                '!GetAZs scalar',
+                '!ImportValue scalar',
+                '!Join sequence',
+                '!Select sequence',
+                '!Split sequence',
+                '!Sub scalar',
+                '!Transform mapping',
+                '!Ref scalar',
+              },
+            },
+          },
+        },
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -231,7 +267,7 @@ return {
 
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
+      local ensure_installed = vim.tbl_keys {}
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'html',
