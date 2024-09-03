@@ -13,6 +13,7 @@ return {
       },
     },
     opts = {
+      async = true,
       notify_on_error = false,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
@@ -20,11 +21,14 @@ return {
         -- languages here or re-enable it for the disabled ones.
         local disable_filetypes = { c = true, cpp = true }
         return {
-          timeout_ms = 500,
+          timeout_ms = 1000,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
         }
       end,
       formatters = {
+        rustfmt = {
+          prepend_args = { '+nightly' },
+        },
         leptosfmt = {
           command = 'leptosfmt',
           args = { '--stdin' },
@@ -34,11 +38,12 @@ return {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         python = { 'ruff_organize_imports', 'ruff_format' },
-        rust = { 'leptosfmt', 'rustfmt' },
+        rust = { 'rustfmt' },
+        proto = { 'buf' },
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
-        yaml = { { 'prettierd', 'prettier' } },
+        yaml = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },

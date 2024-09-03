@@ -1,4 +1,4 @@
 return {
-  'b0o/schemastore.nvim',
+  'ron-rs/ron.vim',
   event = 'VeryLazy',
 }

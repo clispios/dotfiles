@@ -40,7 +40,7 @@ require('lazy').setup({
 
   require 'kickstart/plugins/cmp',
 
-  require 'kickstart/plugins/tokyonight',
+  -- require 'kickstart/plugins/tokyonight',
 
   require 'kickstart/plugins/todo-comments',
 
@@ -70,6 +70,10 @@ require('lazy').setup({
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   -- { import = 'custom.plugins' },
 
+  require 'custom.plugins.ron',
+
+  require 'custom.plugins.kanagawa',
+
   require 'custom.plugins.hop',
 
   require 'custom.plugins.neogit',
@@ -86,6 +90,9 @@ require('lazy').setup({
 
   require 'custom.plugins.schemastore',
 
+  require 'custom.plugins.scrolleof',
+
+  require 'custom.plugins.peek',
   -- require 'custom.plugins.null-ls',
 }, {
   ui = {

@@ -1,6 +1,7 @@
 return {
   'nvimtools/none-ls.nvim',
   ft = { 'python' },
+  event = 'VeryLazy',
   opts = function()
     local bi = require 'null-ls.builtins'
     return {

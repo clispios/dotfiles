@@ -1,6 +1,7 @@
 return {
   'folke/trouble.nvim',
   branch = 'main', -- IMPORTANT!
+  event = 'VeryLazy',
   keys = {
     {
       '<leader>xx',

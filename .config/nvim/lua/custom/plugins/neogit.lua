@@ -7,6 +7,7 @@ return {
       fzf_lua = false,
     },
   },
+  event = 'VeryLazy',
   dependencies = {
     'nvim-lua/plenary.nvim', -- required
     'sindrets/diffview.nvim', -- optional - Diff integration

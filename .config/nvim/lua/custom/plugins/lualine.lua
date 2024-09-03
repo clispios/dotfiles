@@ -5,7 +5,7 @@ end
 local lualine_conf = {
   options = {
     icons_enabled = true,
-    theme = 'auto',
+    theme = 'kanagawa',
     component_separators = { left = '\u{e0b9}', right = '\u{e0bf}' },
     section_separators = { left = '\u{e0b8}', right = '\u{e0be}' },
     disabled_filetypes = {
@@ -27,7 +27,7 @@ local lualine_conf = {
     lualine_c = { 'filename' },
     lualine_x = { 'encoding', 'fileformat', 'filetype', happy_stuff },
     lualine_y = { 'progress' },
-    lualine_z = { 'location', { 'datetime', style = '%H:%m:%S', separator = { right = '\u{e0b4}' }, left_padding = 1 } },
+    lualine_z = { 'location', { 'datetime', style = '%H:%M:%S', separator = { right = '\u{e0b4}' }, left_padding = 1 } },
   },
   inactive_sections = {
     lualine_a = {},

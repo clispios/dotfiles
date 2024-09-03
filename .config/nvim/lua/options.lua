@@ -60,5 +60,11 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 vim.wo.relativenumber = true
-vim.o.tabstop = 4
+vim.opt.tabstop = 4
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = false
 -- vim: ts=2 sts=2 sw=2 et

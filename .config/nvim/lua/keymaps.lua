@@ -52,3 +52,4 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Oil command
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+vim.keymap.set('n', '<C-p>', '<CMD>HopWord<CR>', { desc = 'Open HopWord' })
