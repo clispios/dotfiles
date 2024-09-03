@@ -6,11 +6,27 @@ PATH="/opt/homebrew/bin:$PATH"
 PATH=$(brew --prefix)/opt/findutils/libexec/gnubin:$PATH
 PATH="$HOME/.cargo/bin:$PATH"
 export DYLD_FALLBACK_LIBRARY_PATH="$(xcode-select --print-path)/usr/lib/"
+# PATH="$HOME/Programming/nvim-macos-arm64/bin:$PATH"
+# PATH="/opt/homebrew/bin:$PATH"
+# PATH=$(brew --prefix)/opt/findutils/libexec/gnubin:$PATH
+PATH="$HOME/.cargo/bin:$PATH"
+PATH="${PATH}:${HOME}/.local/bin"
+PATH="${PATH}:${HOME}/wezterm/target/release"
+PATH="${PATH}:/usr/lib/virtiofsd"
 export EDITOR=nvim
 export VISUAL="$EDITOR"
 alias vi="nvim"
 alias vim="nvim"
-alias dircolors="gdircolors"
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias wezterm=/home/geo/wezterm/target/release/wezterm
+export XMODIFIERS=@im=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export SDL_IM_MODULE=fcitx
+export LC_ALL=C.utf8
+#PS1='[\u@\h \W]\$ '
+# alias dircolors="gdircolors"
 # export LS_COLORS=…
 # zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # if whence dircolors >/dev/null; then
@@ -20,5 +36,5 @@ alias dircolors="gdircolors"
 #   export CLICOLOR=1
 #   LSCOLORS=…
 # fi
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+# export PYENV_ROOT="$HOME/.pyenv"
+# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"

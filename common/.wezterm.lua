@@ -1,12 +1,16 @@
--- Pull in the wezterm API
 local wezterm = require("wezterm")
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
 -- This is where you actually apply your config choices
-config.font = wezterm.font("Iosevka Nerd Font", { weight = "DemiBold" })
-config.font_size = 15
+config.font = wezterm.font_with_fallback({
+	{ family = "Iosevka Nerd Font", weight = "Regular" },
+	"Noto Color Emoji",
+	"Noto Sans CJK JP",
+	"Noto Sans",
+})
+config.font_size = 13
 --config.freetype_load_target = "VerticalLcd"
 --config.freetype_render_target = "HorizontalLcd"
 config.color_scheme = "Kanagawa (Gogh)" -- "tokyonight_night"
@@ -37,10 +41,10 @@ config.colors = {
 }
 
 config.window_padding = {
-	left = 0,
-	right = 0,
-	top = 0,
-	bottom = 0,
+	left = 2,
+	right = 2,
+	top = 2,
+	bottom = 2,
 }
 
 config.keys = {
@@ -64,11 +68,12 @@ config.keys = {
 	{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
 }
 
-config.window_decorations = "RESIZE"
-
-wezterm.on("window-config-reloaded", function(window, _)
-	window:toast_notification("wezterm", "configuration reloaded!", nil, 1000)
-end)
+config.window_decorations = "NONE"
+config.front_end = "WebGpu"
+config.webgpu_power_preference = "HighPerformance"
+-- wezterm.on("window-config-reloaded", function(window, _)
+-- 	window:toast_notification("wezterm", "configuration reloaded! Nice!", nil, 1000)
+-- end)
 
 -- and finally, return the configuration to wezterm
 return config
