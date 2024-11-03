@@ -6,7 +6,7 @@ return {
     config = function()
       local lint = require 'lint'
       local virtual = os.getenv 'VIRTUAL_ENV' or '/usr'
-      table.insert(lint.linters.mypy.args, '--python-executable')
+      table.insert(lint.linters.mypy.args, '--python-executable --ignore-missing-imports')
       table.insert(lint.linters.mypy.args, virtual .. '/bin/python3')
       lint.linters_by_ft = {
         python = { 'ruff', 'mypy' },

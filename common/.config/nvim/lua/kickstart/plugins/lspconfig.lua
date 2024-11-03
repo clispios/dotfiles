@@ -14,6 +14,7 @@ return {
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
       { 'folke/neodev.nvim', opts = {} },
+      -- {'teal-language/toml.lua', config = true}
     },
     config = function()
       -- Brief aside: **What is LSP?**
@@ -146,6 +147,19 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+      local function get_project_rustanalyzer_settings()
+        local handle = io.open(vim.fn.resolve(vim.fn.getcwd() .. '/./rust-analyzer.json'))
+        if not handle then
+          return {}
+        end
+        local out = handle:read '*a'
+        handle:close()
+        local config = vim.json.decode(out)
+        if type(config) == 'table' then
+          return config
+        end
+        return {}
+      end
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
       --
@@ -190,13 +204,30 @@ return {
         -- },
         rust_analyzer = {
           settings = {
-            ['rust-analyzer'] = {
-              cargo = {
-                buildScripts = {
-                  enable = true,
-                },
+            ['rust-analyzer'] = vim.tbl_deep_extend(
+              'force',
+              {
+                -- Defaults (can be overridden by .rust-analyzer.json
               },
-            },
+              get_project_rustanalyzer_settings(),
+              {
+                -- Overrides (forces these regardless of what's in .rust-analyzer.json
+                cargo = {
+                  buildScripts = {
+                    enable = true,
+                  },
+                },
+                -- procMacro = { enable = true },
+                -- diagnostics = { disabled = { 'inactive-code' } },
+              }
+            ),
+            --   {
+            --   cargo = {
+            --     buildScripts = {
+            --       enable = true,
+            --     },
+            --   },
+            -- },
           },
         },
         bufls = {},
@@ -213,7 +244,9 @@ return {
         jsonls = {},
         html = {},
         tsserver = {},
-
+        ts_ls = {},
+        terraformls = {},
+        tflint = {},
         yamlls = {
           -- on_attach = function(_, bufnr)
           --   print 'LSP attached'
@@ -275,6 +308,8 @@ return {
       --
       --  You can press `g?` for help in this menu.
       require('mason').setup()
+      --   PATH = 'append',
+      -- }
 
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
@@ -290,6 +325,7 @@ return {
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
+            -- server_name = server_name == 'tsserver' and 'ts_ls' or server_name
             local server = servers[server_name] or {}
             -- This handles overriding only values explicitly passed
             -- by the server configuration above. Useful when disabling

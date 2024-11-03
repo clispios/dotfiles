@@ -36,7 +36,16 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+alias wb="cd $HOME/OneDrive\ -\ shure/obsidian/work/"
+alias sb="cd $HOME/obsidian/personal/"
+alias inpy="$(pyenv init -)"
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export CC="/opt/homebrew/opt/llvm/bin/clang"
+export CXX="$CC++"
+export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/llvm/lib"
+export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm/include"
+
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 eval "$(starship init zsh)"
-#eval "$(pyenv init -)"
+eval "$(pyenv init -)"
+

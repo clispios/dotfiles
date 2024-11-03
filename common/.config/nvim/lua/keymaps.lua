@@ -53,3 +53,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Oil command
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 vim.keymap.set('n', '<C-p>', '<CMD>HopWord<CR>', { desc = 'Open HopWord' })
+
+-- Obsidian
+vim.keymap.set('n', '<leader>opi', '<CMD>ObsidianPasteImg<CR>', { desc = 'Paste Obsidian Image' })
+vim.keymap.set('n', '<leader>ont', '<CMD>ObsidianNewFromTemplate<CR>', { desc = 'Create Note From Template' })
+vim.keymap.set('n', '<leader>olt', '<CMD>ObsidianTags<CR>', { desc = 'List Obsidian Tags' })
+vim.keymap.set('n', '<leader>os', '<CMD>ObsidianSearch<CR>', { desc = 'Obsidian Search' })
+vim.keymap.set('n', '<leader>ot', '<CMD>ObsidianToday<CR>', { desc = "Today's Note" })

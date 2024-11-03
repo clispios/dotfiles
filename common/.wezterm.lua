@@ -10,13 +10,11 @@ config.font = wezterm.font_with_fallback({
 	"Noto Sans CJK JP",
 	"Noto Sans",
 })
-config.font_size = 13
+config.font_size = 15
 --config.freetype_load_target = "VerticalLcd"
 --config.freetype_render_target = "HorizontalLcd"
 config.color_scheme = "Kanagawa (Gogh)" -- "tokyonight_night"
 
-config.hide_tab_bar_if_only_one_tab = true
-config.use_fancy_tab_bar = true
 config.initial_cols = 120
 config.initial_rows = 30
 config.window_frame = {
@@ -47,16 +45,72 @@ config.window_padding = {
 	bottom = 2,
 }
 
+-- keybinds and tmux things
 config.keys = {
+	{
+		key = "|",
+		mods = "CTRL|SHIFT|ALT",
+		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+	},
+	{
+		key = "_",
+		mods = "CTRL|SHIFT|ALT",
+		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+	},
 	{
 		key = "w",
 		mods = "CTRL|SHIFT",
 		action = wezterm.action.CloseCurrentPane({ confirm = true }),
 	},
 	{
+		key = "l",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.ActivatePaneDirection("Right"),
+	},
+	{
+		key = "h",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.ActivatePaneDirection("Left"),
+	},
+	{
+		key = "j",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.ActivatePaneDirection("Down"),
+	},
+	{
+		key = "k",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.ActivatePaneDirection("Up"),
+	},
+	{
 		key = "b",
 		mods = "CTRL|SHIFT",
+		action = wezterm.action.RotatePanes("CounterClockwise"),
+	},
+	{
+		key = "f",
+		mods = "CTRL|SHIFT",
 		action = wezterm.action.RotatePanes("Clockwise"),
+	},
+	{
+		key = "LeftArrow",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.AdjustPaneSize({ "Left", 10 }),
+	},
+	{
+		key = "RightArrow",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.AdjustPaneSize({ "Right", 10 }),
+	},
+	{
+		key = "UpArrow",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.AdjustPaneSize({ "Up", 10 }),
+	},
+	{
+		key = "DownArrow",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action.AdjustPaneSize({ "Down", 10 }),
 	},
 	{
 		key = "f",
@@ -73,6 +127,15 @@ config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
 -- wezterm.on("window-config-reloaded", function(window, _)
 -- 	window:toast_notification("wezterm", "configuration reloaded! Nice!", nil, 1000)
+-- end)
+-- tab bar
+-- config.window_decorations = "RESIZE"
+config.hide_tab_bar_if_only_one_tab = false
+config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = true
+
+-- wezterm.on("window-config-reloaded", function(window, _)
+-- 	window:toast_notification("wezterm", "configuration reloaded!", nil, 1000)
 -- end)
 
 -- and finally, return the configuration to wezterm

@@ -18,15 +18,17 @@ return {
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup({
-        preset = "helix"
-      })
+      require('which-key').setup {
+        preset = 'helix',
+      }
       -- Document existing key chains
       require('which-key').add {
         { '<leader>c', group = '[C]ode' },
         { '<leader>c_', hidden = true },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>d_', hidden = true },
+        { '<leader>o', group = '[O]bsidian' },
+        { '<leader>o_', hidden = true },
         { '<leader>h', group = 'Git [H]unk' },
         { '<leader>h_', hidden = true },
         { '<leader>r', group = '[R]ename' },

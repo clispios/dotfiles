@@ -1,4 +1,4 @@
--- [[ Setting options ]]
+-- [[ Setting options ]]option
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
@@ -32,6 +32,15 @@ vim.opt.smartcase = true
 
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
+
+-- vim.opt.conceallevel = 2
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  callback = function()
+    vim.wo.conceallevel = 2
+  end,
+})
 
 -- Decrease update time
 vim.opt.updatetime = 250
@@ -68,3 +77,6 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
 -- vim: ts=2 sts=2 sw=2 et
+
+-- spelling
+vim.opt.spelllang = 'en_us'

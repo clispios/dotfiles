@@ -44,6 +44,9 @@ return {
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
         yaml = { 'prettierd', 'prettier', stop_after_first = true },
+        terraform = { 'terraform_fmt' },
+        tf = { 'terraform_fmt' },
+        ['terraform-vars'] = { 'terraform_fmt' },
       },
     },
   },

@@ -86,7 +86,11 @@ require('lazy').setup({
 
   require 'custom.plugins.oil',
 
+  require 'custom.plugins.obsidian',
+
   require 'custom.plugins.nvim-surround',
+
+  require 'custom.plugins.surql',
 
   require 'custom.plugins.schemastore',
 
