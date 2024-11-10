@@ -7,3 +7,4 @@ fi
 if [ -f "$HOME/.zsh_plugins" ]; then
 	source "$HOME/.zsh_plugins"
 fi
+

@@ -104,6 +104,10 @@ require('lazy').setup({
 
   require 'custom.plugins.yuck',
 
+  require 'custom.plugins.ccc',
+
+  require 'custom.plugins.colorizer',
+
   -- require 'custom.plugins.null-ls',
 }, {
   dev = { path = '~/local-lazy-plugins' },

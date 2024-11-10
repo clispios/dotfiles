@@ -24,10 +24,10 @@ return {
       template = 'daily.md',
     },
     workspaces = {
-      {
-        name = 'work',
-        path = '~/OneDrive - shure/obsidian/work/',
-      },
+      -- {
+      --   name = 'work',
+      --   path = '~/OneDrive - shure/obsidian/work/',
+      -- },
       {
         name = 'personal',
         path = '~/obsidian/personal/',

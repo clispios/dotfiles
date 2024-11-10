@@ -4,6 +4,8 @@
 # PATH=$(brew --prefix)/opt/findutils/libexec/gnubin:$PATH
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="${PATH}:${HOME}/.local/bin"
+export DENO_INSTALL="${HOME}/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 # export PATH="${PATH}:${HOME}/wezterm/target/release"
 export PATH="${PATH}:/usr/lib/virtiofsd"
 export EDITOR=nvim
