@@ -90,6 +90,8 @@ require('lazy').setup({
 
   require 'custom.plugins.nvim-surround',
 
+  require 'custom.plugins.sailfish',
+
   require 'custom.plugins.surql',
 
   require 'custom.plugins.schemastore',
@@ -99,6 +101,7 @@ require('lazy').setup({
   require 'custom.plugins.peek',
   -- require 'custom.plugins.null-ls',
 }, {
+  dev = { path = '~/local-lazy-plugins' },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table

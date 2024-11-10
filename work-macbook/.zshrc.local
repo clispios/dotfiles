@@ -39,13 +39,15 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 alias wb="cd $HOME/OneDrive\ -\ shure/obsidian/work/"
 alias sb="cd $HOME/obsidian/personal/"
 alias inpy="$(pyenv init -)"
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-export CC="/opt/homebrew/opt/llvm/bin/clang"
-export CXX="$CC++"
-export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/llvm/lib"
-export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm/include"
+alias imgcat='wezterm imgcat'
+# export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+# export CC="/opt/homebrew/opt/llvm/bin/clang"
+# export CXX="$CC++"
+# export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/llvm/lib"
+# export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm/include"
 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 eval "$(starship init zsh)"
 eval "$(pyenv init -)"
-
+source <(fzf --zsh)
+eval "$(zoxide init zsh)"

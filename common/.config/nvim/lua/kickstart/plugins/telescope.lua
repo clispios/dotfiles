@@ -61,8 +61,27 @@ return {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          find_files = {
+            previewer = true,
+          },
+        },
         defaults = {
+          -- NOTE: start sailfish
+          file_previewer = require('telescope.previewers').vim_buffer_cat.new,
+          file_ignore_patterns = {},
+          mappings = {
+            i = {},
+          },
+          buffer_previewer_maker = function(filepath, bufnr, opts)
+            -- Add .stpl extension to be treated as sailfish
+            if filepath:match '%.stpl$' then
+              vim.api.nvim_buf_set_option(bufnr, 'filetype', 'sailfish')
+            end
+            -- Call the default previewer_maker
+            require('telescope.previewers').buffer_previewer_maker(filepath, bufnr, opts)
+          end,
+          -- NOTE: end sailfish
           preview = {
             mime_hook = function(filepath, bufnr, opts)
               local is_image = function(filepath)

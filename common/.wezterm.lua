@@ -122,9 +122,10 @@ config.keys = {
 	{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
 }
 
-config.window_decorations = "NONE"
+config.window_decorations = "RESIZE"
 config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
+config.max_fps = 144
 -- wezterm.on("window-config-reloaded", function(window, _)
 -- 	window:toast_notification("wezterm", "configuration reloaded! Nice!", nil, 1000)
 -- end)

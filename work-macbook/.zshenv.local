@@ -6,25 +6,26 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export DYLD_FALLBACK_LIBRARY_PATH="$(xcode-select --print-path)/usr/lib/"
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-export CC="/opt/homebrew/opt/llvm/bin/clang"
-export CXX="$CC++"
-export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/llvm/lib"
-export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm/include"
+# export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+# export CC="/opt/homebrew/opt/llvm/bin/clang"
+# export CXX="$CC++"
+# export LDFLAGS="$LDFLAGS -L/opt/homebrew/opt/llvm/lib"
+# export CPPFLAGS="$CPPFLAGS -I/opt/homebrew/opt/llvm/include"
 export EDITOR=nvim
 export VISUAL="$EDITOR"
 alias vi="nvim"
 alias vim="nvim"
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-alias wezterm=/home/geo/wezterm/target/release/wezterm
+# alias wezterm=/home/geo/wezterm/target/release/wezterm
+alias imgcat='wezterm imgcat'
 export XMODIFIERS=@im=fcitx
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export SDL_IM_MODULE=fcitx
 export LC_ALL=C.utf8
 #PS1='[\u@\h \W]\$ '
-# alias dircolors="gdircolors"
+alias dircolors="gdircolors"
 # export LS_COLORS=…
 # zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # if whence dircolors >/dev/null; then
@@ -34,5 +35,5 @@ export LC_ALL=C.utf8
 #   export CLICOLOR=1
 #   LSCOLORS=…
 # fi
-# export PYENV_ROOT="$HOME/.pyenv"
-# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"

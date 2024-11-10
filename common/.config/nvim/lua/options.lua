@@ -80,3 +80,7 @@ vim.opt.expandtab = false
 
 -- spelling
 vim.opt.spelllang = 'en_us'
+
+vim.g.markdown_fenced_languages = {
+  'ts=typescript',
+}
