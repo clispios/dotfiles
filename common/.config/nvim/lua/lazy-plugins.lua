@@ -99,6 +99,11 @@ require('lazy').setup({
   require 'custom.plugins.scrolleof',
 
   require 'custom.plugins.peek',
+
+  require 'custom.plugins.conjure',
+
+  require 'custom.plugins.yuck',
+
   -- require 'custom.plugins.null-ls',
 }, {
   dev = { path = '~/local-lazy-plugins' },

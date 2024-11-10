@@ -9,6 +9,7 @@ return {
       table.insert(lint.linters.mypy.args, '--python-executable --ignore-missing-imports')
       table.insert(lint.linters.mypy.args, virtual .. '/bin/python3')
       lint.linters_by_ft = {
+        clojure = { 'clj-kondo' },
         python = { 'ruff', 'mypy' },
       }
 

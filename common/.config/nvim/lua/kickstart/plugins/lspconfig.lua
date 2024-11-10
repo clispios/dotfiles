@@ -190,6 +190,7 @@ return {
             },
           },
         },
+        clojure_lsp = {},
         -- pylsp = {
         --   settings = {
         --     pylsp = {
