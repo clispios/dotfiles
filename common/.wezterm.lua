@@ -1,7 +1,23 @@
 local wezterm = require("wezterm")
+local syssfo = require("syssfo")
+
+local sysInfo = syssfo.getSystemInfo()
 
 -- This will hold the configuration.
 local config = wezterm.config_builder()
+
+if sysInfo.os == "Darwin" then
+	if sysInfo.hostname == "PCNINELSONG02" then
+		config.font_size = 15
+		config.window_decorations = "RESIZE"
+	else
+		config.font_size = 13
+		config.window_decorations = "RESIZE"
+	end
+else
+	config.font_size = 13
+	config.window_decorations = "NONE"
+end
 
 -- This is where you actually apply your config choices
 config.font = wezterm.font_with_fallback({
@@ -10,7 +26,7 @@ config.font = wezterm.font_with_fallback({
 	"Noto Sans CJK JP",
 	"Noto Sans",
 })
-config.font_size = 13
+-- config.font_size = 15
 --config.freetype_load_target = "VerticalLcd"
 --config.freetype_render_target = "HorizontalLcd"
 config.color_scheme = "Kanagawa (Gogh)" -- "tokyonight_night"
@@ -122,7 +138,7 @@ config.keys = {
 	{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
 }
 
-config.window_decorations = "NONE"
+-- config.window_decorations = "RESIZE"
 config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
 config.max_fps = 144
