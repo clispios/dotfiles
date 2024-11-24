@@ -208,27 +208,98 @@ return {
             ['rust-analyzer'] = vim.tbl_deep_extend(
               'force',
               {
-                -- Defaults (can be overridden by .rust-analyzer.json
-              },
-              get_project_rustanalyzer_settings(),
-              {
-                -- Overrides (forces these regardless of what's in .rust-analyzer.json
+                assist = {
+                  importEnforceGranularity = true,
+                  importPrefix = 'create',
+                },
                 cargo = {
-                  buildScripts = {
+                  allFeatures = true,
+                  loadOutDirsFromCheck = true,
+                  runBuildScripts = true,
+                },
+                checkOnSave = {
+                  allFeatures = true,
+                  command = 'clippy',
+                  extraArgs = { '--no-deps' },
+                },
+                completion = {
+                  autoimport = {
+                    enable = true,
+                  },
+                  postfix = {
+                    enable = true,
+                  },
+                  privateEditable = {
+                    enable = true,
+                  },
+                  snippets = {
+                    custom = true,
+                  },
+                  fullFunctionSignatures = {
                     enable = true,
                   },
                 },
-                procMacro = { enable = true },
+                diagnostics = {
+                  enable = true,
+                  experimental = {
+                    enable = true,
+                  },
+                },
+                hover = {
+                  documentation = {
+                    enable = true,
+                    format = 'markdown',
+                    maxLength = 9999,
+                  },
+                  actions = {
+                    enable = true,
+                    debug = true,
+                    gotoTypeDef = true,
+                    implementations = true,
+                    references = true,
+                  },
+                },
+                lens = {
+                  enable = true,
+                  debug = true,
+                  implementations = true,
+                  references = true,
+                  methodReferences = true,
+                },
+              },
+              get_project_rustanalyzer_settings(),
+              {
+                cargo = {
+                  buildScripts = {
+                    enable = true,
+                    overrideCommand = nil,
+                  },
+                },
+                procMacro = {
+                  enable = true,
+                  ignored = {},
+                },
               }
             ),
-            --   {
-            --   cargo = {
-            --     buildScripts = {
-            --       enable = true,
-            --     },
-            --   },
-            -- },
           },
+          capabilities = (function()
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.completion.completionItem.documentationFormat = { 'markdown', 'plaintext' }
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
+            capabilities.textDocument.completion.completionItem.preselectSupport = false
+            capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+            capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+            capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+            capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+            capabilities.textDocument.completion.completionItem.resolveSupport = {
+              properties = {
+                'documentation',
+                'detail',
+                'additionalTextEdits',
+              },
+            }
+            return capabilities
+          end)(),
         },
         buf_ls = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -249,7 +320,17 @@ return {
           single_file_support = false,
         },
         denols = {
-          root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
+          root_dir = function(fname)
+            local has_deno_json = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc')(fname)
+            local has_package_json = require('lspconfig').util.root_pattern 'package.json'(fname)
+
+            -- Only return a root dir if we have a Deno config AND NO package.json
+            -- Or if we have both but Deno config is closer to the file
+            if has_deno_json and not has_package_json then
+              return has_deno_json
+            end
+            return nil
+          end,
         },
         terraformls = {},
         tflint = {},

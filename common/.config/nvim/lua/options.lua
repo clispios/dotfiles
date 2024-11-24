@@ -84,3 +84,6 @@ vim.opt.spelllang = 'en_us'
 vim.g.markdown_fenced_languages = {
   'ts=typescript',
 }
+
+-- Rebind it from K to <prefix>gk
+vim.g['conjure#mapping#doc_word'] = 'gk'
