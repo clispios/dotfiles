@@ -33,6 +33,10 @@ return {
           command = 'leptosfmt',
           args = { '--stdin' },
         },
+        sqlfmt = {
+          command = 'sql-formatter',
+          args = { '-l', 'postgresql' },
+        },
       },
       formatters_by_ft = {
         lua = { 'stylua' },
@@ -44,6 +48,7 @@ return {
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
+        sql = { 'sqlfmt' },
         yaml = { 'prettierd', 'prettier', stop_after_first = true },
         terraform = { 'terraform_fmt' },
         tf = { 'terraform_fmt' },

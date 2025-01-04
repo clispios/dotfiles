@@ -74,6 +74,7 @@ return {
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          map('gy', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
@@ -172,6 +173,34 @@ return {
       local servers = {
         -- clangd = {},
         -- gopls = {},
+        -- pylsp = {
+        --   settings = {
+        --     pylsp = {
+        --       plugins = {
+        --         -- Disable linting/formatting in pylsp since we use ruff
+        --         flake8 = { enabled = false },
+        --         pycodestyle = { enabled = false },
+        --         mccabe = { enabled = false },
+        --         pyflakes = { enabled = false },
+        --         autopep8 = { enabled = false },
+        --         yapf = { enabled = false },
+        --         mypy = {
+        --           enabled = true,
+        --           live_mode = true,
+        --           dmypy = true,
+        --           strict = false,
+        --         },
+        --         -- Keep completion and navigation features
+        --         jedi_completion = { enabled = true },
+        --         jedi_definition = { enabled = true },
+        --         jedi_references = { enabled = true },
+        --         jedi_symbols = { enabled = true },
+        --         rope_completion = { enabled = true },
+        --       },
+        --     },
+        --   },
+        -- },
+        --
         pyright = {
           capabilities = (function()
             local caps = vim.lsp.protocol.make_client_capabilities()
@@ -190,6 +219,77 @@ return {
             },
           },
         },
+        -- mypy for type checking
+        mypy = {
+          settings = {
+            mypy = {
+              -- Enable incremental mode for better performance
+              dmypy = true,
+              -- Adjust severity levels if needed
+              severity = {
+                error = 'error',
+                note = 'information',
+              },
+              -- mypy configuration
+              config = {
+                disallow_untyped_defs = true,
+                check_untyped_defs = true,
+                disallow_any_generics = false,
+                disallow_incomplete_defs = false,
+              },
+            },
+          },
+        },
+
+        -- ruff for linting and formatting
+        ruff = {
+          init_options = {
+            settings = {
+              format = { enabled = true },
+              lint = { enabled = true },
+              -- Disable features handled by other LSPs
+              hover = { enabled = false },
+              completion = { enabled = false },
+            },
+          },
+          on_attach = function(client)
+            client.server_capabilities.hoverProvider = false
+            client.server_capabilities.completionProvider = false
+            client.server_capabilities.signatureHelpProvider = false
+          end,
+        },
+        -- pylsp = {
+        --   settings = {
+        --     pylsp = {
+        --       plugins = {
+        --         flake8 = {
+        --           enabled = false,
+        --         },
+        --         mypy = {
+        --           enabled = true,
+        --         },
+        --         pycodestyle = {
+        --           enabled = false,
+        --         },
+        --         autopep8 = { enabled = false },
+        --         mccabe = { enabled = false },
+        --         pylint = { enabled = false },
+        --         pyflakes = {
+        --           enabled = false,
+        --         },
+        --       },
+        --     },
+        --   },
+        -- },
+        -- ruff = {
+        --   -- trace = 'messages',
+        --   -- init_options = {
+        --   --   settings = {
+        --   --     logLevel = 'debug',
+        --   --   },
+        --   -- },
+        --   single_file_support = false,
+        -- },
         clojure_lsp = {},
         -- pylsp = {
         --   settings = {
@@ -316,20 +416,27 @@ return {
         html = {},
         tsserver = {},
         ts_ls = {
-          root_dir = require('lspconfig').util.root_pattern 'package.json',
+          root_dir = function(fname)
+            local has_deno_json = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc', 'deno.lock')(fname)
+            local has_package_json = require('lspconfig').util.root_pattern 'package.json'(fname)
+            -- Only return a root dir if we have a Deno config AND NO package.json
+            -- Or if we have both but Deno config is closer to the file
+            if has_package_json and not has_deno_json then
+              print 'Has only package.json and no deno stuff!'
+              return has_package_json
+            end
+            print 'Has detected deno stuff!'
+            print('ts_ls package.json loc:', has_package_json)
+            print('ts_ls deno loc:', has_deno_json)
+            return nil
+          end,
           single_file_support = false,
         },
         denols = {
           root_dir = function(fname)
-            local has_deno_json = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc')(fname)
-            local has_package_json = require('lspconfig').util.root_pattern 'package.json'(fname)
-
-            -- Only return a root dir if we have a Deno config AND NO package.json
-            -- Or if we have both but Deno config is closer to the file
-            if has_deno_json and not has_package_json then
-              return has_deno_json
-            end
-            return nil
+            local has_deno_stuff = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc', 'deno.lock')(fname)
+            print('denols deno loc:', has_deno_stuff)
+            return has_deno_stuff
           end,
         },
         terraformls = {},
@@ -406,6 +513,7 @@ return {
         'html',
         'cssls',
         'eslint',
+        'mypy',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
